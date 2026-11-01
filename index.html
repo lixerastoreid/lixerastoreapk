@@ -1,1 +1,353 @@
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071225">
+  <meta name="description" content="LIXERA STORE - Premium Application Store">
+  <title>LIXERA STORE | APK PREMIUM</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="top-header">
+  <div class="brand">
+    <img src="lixeralogo.png" alt="LIXERA STORE" class="store-logo">
+    <div class="brand-text">
+      <h2>LIXERA <span>STORE</span></h2>
+      <small>PREMIUM APPLICATION</small>
+    </div>
+  </div>
+  <div class="country">
+    <span>🇮🇩</span>
+    <span>ID</span>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="main-container">
+
+  <!-- HOME -->
+  <section id="homePage" class="page active">
+    <div class="hero">
+      <div class="hero-glow"></div>
+      <span class="hero-tag">WELCOME TO LIXERA STORE</span>
+      <h1>PREMIUM<br><span>APPLICATION</span></h1>
+      <p>Temukan aplikasi premium favoritmu dengan harga terjangkau.</p>
+      <button class="primary-btn" onclick="showPage('catalogPage')">
+        MULAI BELANJA <span>→</span>
+      </button>
+      <div class="hero-bottom">
+        <span>✦ PREMIUM QUALITY</span>
+        <span>✦ EASY ORDER</span>
+      </div>
+    </div>
+
+    <div class="home-info">
+      <div class="info-card">
+        <span class="info-icon">⚡</span>
+        <div>
+          <b>Proses Mudah</b>
+          <small>Pemesanan praktis</small>
+        </div>
+      </div>
+      <div class="info-card">
+        <span class="info-icon">🛡️</span>
+        <div>
+          <b>Pelayanan Admin</b>
+          <small>Konfirmasi WhatsApp</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-action">
+      <h3>SIAP UPGRADE APLIKASIMU?</h3>
+      <p>Pilih produk yang kamu inginkan.</p>
+      <button class="outline-btn" onclick="showPage('catalogPage')">
+        LIHAT KATALOG
+      </button>
+    </div>
+  </section>
+
+  <!-- KATALOG -->
+  <section id="catalogPage" class="page">
+    <div class="page-heading">
+      <span class="eyebrow">OUR COLLECTION</span>
+      <h1>KATEGORI <span>APLIKASI</span></h1>
+      <p>Pilih aplikasi untuk melihat detail dan harga.</p>
+    </div>
+
+    <div class="category-filter">
+      <button class="filter-btn active" onclick="filterProducts('all',this)">
+        SEMUA
+      </button>
+      <button class="filter-btn" onclick="filterProducts('available',this)">
+        PROMO
+      </button>
+      <button class="filter-btn" onclick="filterProducts('ask',this)">
+        CEK STOK
+      </button>
+    </div>
+
+    <div id="productGrid" class="product-grid">
+
+      <article class="product-card" data-status="available">
+        <div class="product-image">
+          <img src="alightmotion.jpg" alt="Alight Motion Premium">
+          <span class="product-label promo-label">PROMO</span>
+        </div>
+        <div class="product-info">
+          <h3>Alight Motion</h3>
+          <p>Premium 1 Tahun</p>
+          <div class="price-area">
+            <del>Rp5.000</del>
+            <strong>Rp1.000</strong>
+          </div>
+          <button class="buy-btn" onclick="selectProduct('Alight Motion Premium 1 Tahun',1000)">
+            BELI SEKARANG →
+          </button>
+        </div>
+      </article>
+
+      <article class="product-card" data-status="ask">
+        <div class="product-image">
+          <img src="canva.jpg" alt="Canva Premium">
+        </div>
+        <div class="product-info">
+          <h3>Canva</h3>
+          <p>Canva Premium</p>
+          <div class="price-area">
+            <strong class="ask-price">Tanya Admin</strong>
+          </div>
+          <button class="buy-btn ask-btn" onclick="askAdmin('Canva Premium')">
+            CEK KETERSEDIAAN →
+          </button>
+        </div>
+      </article>
+
+      <article class="product-card" data-status="ask">
+        <div class="product-image">
+          <img src="capcut.jpg" alt="CapCut Premium">
+        </div>
+        <div class="product-info">
+          <h3>CapCut</h3>
+          <p>CapCut Premium</p>
+          <div class="price-area">
+            <strong class="ask-price">Tanya Admin</strong>
+          </div>
+          <button class="buy-btn ask-btn" onclick="askAdmin('CapCut Premium')">
+            CEK KETERSEDIAAN →
+          </button>
+        </div>
+      </article>
+
+      <article class="product-card" data-status="ask">
+        <div class="product-image">
+          <img src="wink.jpg" alt="Wink Premium">
+        </div>
+        <div class="product-info">
+          <h3>Wink</h3>
+          <p>Wink Premium</p>
+          <div class="price-area">
+            <strong class="ask-price">Tanya Admin</strong>
+          </div>
+          <button class="buy-btn ask-btn" onclick="askAdmin('Wink Premium')">
+            CEK KETERSEDIAAN →
+          </button>
+        </div>
+      </article>
+
+      <article class="product-card" data-status="ask">
+        <div class="product-image">
+          <img src="youtube.jpg" alt="YouTube Premium">
+        </div>
+        <div class="product-info">
+          <h3>YouTube</h3>
+          <p>YouTube Premium</p>
+          <div class="price-area">
+            <strong class="ask-price">Tanya Admin</strong>
+          </div>
+          <button class="buy-btn ask-btn" onclick="askAdmin('YouTube Premium')">
+            CEK KETERSEDIAAN →
+          </button>
+        </div>
+      </article>
+
+      <article class="product-card" data-status="ask">
+        <div class="product-image">
+          <img src="netflix.jpg" alt="Netflix Premium">
+        </div>
+        <div class="product-info">
+          <h3>Netflix</h3>
+          <p>Netflix Premium</p>
+          <div class="price-area">
+            <strong class="ask-price">Tanya Admin</strong>
+          </div>
+          <button class="buy-btn ask-btn" onclick="askAdmin('Netflix Premium')">
+            CEK KETERSEDIAAN →
+          </button>
+        </div>
+      </article>
+
+      <article class="product-card" data-status="ask">
+        <div class="product-image">
+          <img src="vn.jpg" alt="VN Premium">
+        </div>
+        <div class="product-info">
+          <h3>VN</h3>
+          <p>VN Premium</p>
+          <div class="price-area">
+            <strong class="ask-price">Tanya Admin</strong>
+          </div>
+          <button class="buy-btn ask-btn" onclick="askAdmin('VN Premium')">
+            CEK KETERSEDIAAN →
+          </button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- FORM PEMESANAN -->
+  <section id="orderPage" class="page">
+    <div class="page-heading">
+      <span class="eyebrow">ORDER FORM</span>
+      <h1>FORMULIR <span>PEMESANAN</span></h1>
+      <p>Lengkapi data pesananmu.</p>
+    </div>
+
+    <div class="order-card">
+      <div class="selected-product">
+        <span>PRODUK DIPILIH</span>
+        <h3 id="selectedName">-</h3>
+        <strong id="selectedPrice">Rp0</strong>
+      </div>
+
+      <form id="orderForm">
+        <label for="customerName">Nama Pembeli</label>
+        <input id="customerName" type="text"
+          placeholder="Masukkan nama kamu" required maxlength="60">
+
+        <label for="customerWA">Nomor WhatsApp</label>
+        <input id="customerWA" type="tel"
+          placeholder="Contoh: 08xxxxxxxxxx" required maxlength="18">
+
+        <label for="customerEmail">Email (opsional)</label>
+        <input id="customerEmail" type="email"
+          placeholder="Masukkan email jika diperlukan">
+
+        <label for="customerNote">Catatan (opsional)</label>
+        <textarea id="customerNote"
+          placeholder="Tulis catatan pesanan..." rows="3" maxlength="300"></textarea>
+
+        <button type="submit" class="primary-btn full-btn">
+          KONFIRMASI PESANAN →
+        </button>
+      </form>
+      <button class="back-btn" onclick="showPage('catalogPage')">
+        ← KEMBALI KE KATALOG
+      </button>
+    </div>
+  </section>
+
+  <!-- CARA ORDER -->
+  <section id="howPage" class="page">
+    <div class="page-heading">
+      <span class="eyebrow">HOW TO ORDER</span>
+      <h1>CARA <span>PEMESANAN</span></h1>
+    </div>
+    <div class="how-list">
+      <div class="how-item"><b>01</b><div><h3>Pilih Produk</h3><p>Pilih aplikasi premium yang tersedia.</p></div></div>
+      <div class="how-item"><b>02</b><div><h3>Isi Formulir</h3><p>Masukkan data pemesanan dengan benar.</p></div></div>
+      <div class="how-item"><b>03</b><div><h3>Bayar QRIS</h3><p>Scan QR yang ditampilkan pada pop-up.</p></div></div>
+      <div class="how-item"><b>04</b><div><h3>Konfirmasi WhatsApp</h3><p>Kirim detail pesanan kepada admin.</p></div></div>
+    </div>
+  </section>
+
+  <!-- KONTAK -->
+  <section id="contactPage" class="page">
+    <div class="page-heading">
+      <span class="eyebrow">CONTACT US</span>
+      <h1>HUBUNGI <span>ADMIN</span></h1>
+      <p>Butuh bantuan? Hubungi admin LIXERA STORE.</p>
+    </div>
+    <div class="contact-card">
+      <div class="contact-icon">✆</div>
+      <h3>WHATSAPP ADMIN</h3>
+      <p>08818238236</p>
+      <button class="primary-btn full-btn" onclick="contactAdmin()">
+        HUBUNGI SEKARANG →
+      </button>
+    </div>
+  </section>
+
+  </main>
+  
+<!-- POP-UP PEMBAYARAN -->
+<div id="paymentModal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal" onclick="closePayment()">×</button>
+
+    <span class="eyebrow">PAYMENT CHECKOUT</span>
+    <h2>PEMBAYARAN <span>QRIS</span></h2>
+
+    <div class="payment-product">
+      <span>DETAIL PESANAN</span>
+      <h3 id="paymentProduct">-</h3>
+      <strong id="paymentPrice">Rp0</strong>
+    </div>
+
+    <div class="qr-container">
+      <img src="qris.jpg" alt="QRIS LIXERA STORE">
+    </div>
+
+    <p class="qr-caption">SCAN QRIS UNTUK MELAKUKAN PEMBAYARAN</p>
+
+    <div class="payment-warning">
+      Pastikan nominal pembayaran sesuai dengan harga pesanan.
+    </div>
+
+    <button class="primary-btn full-btn" onclick="sendOrderWhatsApp()">
+      SAYA SUDAH BAYAR →
+    </button>
+
+    <button class="back-btn" onclick="closePayment()">
+      TUTUP
+    </button>
+  </div>
+</div>
+
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav">
+  <button class="nav-item active" onclick="showPage('homePage',this)">
+    <span>⌂</span>
+    <small>Home</small>
+  </button>
+
+  <button class="nav-item" onclick="showPage('catalogPage',this)">
+    <span>▦</span>
+    <small>Kategori</small>
+  </button>
+
+  <button class="nav-item" onclick="showPage('howPage',this)">
+    <span>ⓘ</span>
+    <small>Cara Order</small>
+  </button>
+
+  <button class="nav-item" onclick="showPage('contactPage',this)">
+    <span>✆</span>
+    <small>Kontak</small>
+  </button>
+</nav>
+
+<footer class="footer">
+  <p>© 2026 LIXERA STORE</p>
+  <small>PREMIUM APPLICATION STORE 🇮🇩</small>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+
