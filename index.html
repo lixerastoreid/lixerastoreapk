@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta name="theme-color" content="#10051f">
 
     <title>APLIKASI PREMIUM - LIXERA</title>
@@ -16,24 +15,30 @@
 
 <body>
 
-<!-- NAVBAR -->
-
 <header class="navbar">
 
-    <div class="brand">
-        <img src="lixeralogo.png" alt="Lixera Logo">
+    <a href="#home" class="brand" id="brandHome">
+        <img src="lixeralogo.png" alt="Lixera">
         <div>
             <h2>LIXERA</h2>
             <small>APLIKASI PREMIUM</small>
         </div>
-    </div>
+    </a>
 
     <button class="menu-toggle" id="menuToggle">☰</button>
 
     <nav id="navigation">
-        <a href="#home" class="nav-link active">Halaman</a>
-        <a href="#produk" class="nav-link">Produk</a>
-        <a href="#pemesanan" class="nav-link">Pemesanan</a>
+        <a href="#home" class="nav-link active" data-page="home">
+            Halaman
+        </a>
+
+        <a href="#produk" class="nav-link" data-page="produk">
+            Produk
+        </a>
+
+        <a href="#pemesanan" class="nav-link" data-page="pemesanan">
+            Pemesanan
+        </a>
     </nav>
 
 </header>
@@ -41,220 +46,282 @@
 
 <!-- HALAMAN UTAMA -->
 
-<section class="hero" id="home">
+<main id="homePage">
 
-    <div class="hero-content">
+    <section class="hero" id="home">
 
-        <span class="hero-label">
-            ✦ PREMIUM DIGITAL STORE
-        </span>
+        <div class="hero-content">
 
-        <h1>
-            WELCOME TO
-            <span>LIXERA STORE</span>
-        </h1>
+            <span class="eyebrow">
+                ✦ PREMIUM DIGITAL STORE
+            </span>
 
-        <p>
-            Temukan berbagai aplikasi premium
-            dengan proses pemesanan yang mudah,
-            praktis dan nyaman.
-        </p>
+            <h1>
+                WELCOME TO
+                <span>LIXERA STORE</span>
+            </h1>
 
-        <a href="#produk" class="primary-btn">
-            LIHAT PRODUK →
-        </a>
+            <p>
+                Temukan berbagai aplikasi premium favoritmu
+                dengan harga menarik dan proses pemesanan mudah.
+            </p>
 
-    </div>
+            <button class="primary-btn" id="exploreBtn">
+                JELAJAHI PRODUK →
+            </button>
 
-    <div class="hero-image">
-        <div class="hero-circle">
-            <img src="lixeralogo.png" alt="Lixera">
         </div>
-    </div>
 
-</section>
-
-
-<!-- INFORMASI -->
-
-<section class="info-container">
-
-    <div class="info-box">
-        <span>✦</span>
-        <div>
-            <h3>Premium Apps</h3>
-            <p>Pilihan aplikasi premium</p>
+        <div class="hero-image">
+            <div class="hero-circle">
+                <img src="lixeralogo.png" alt="Lixera Logo">
+            </div>
         </div>
-    </div>
 
-    <div class="info-box">
-        <span>◈</span>
-        <div>
-            <h3>Promo Menarik</h3>
-            <p>Diskon menggunakan kode promo</p>
+    </section>
+
+
+    <!-- KEUNGGULAN -->
+
+    <section class="info-container">
+
+        <div class="info-box">
+            <span>✦</span>
+            <div>
+                <h3>Premium Apps</h3>
+                <p>Pilihan aplikasi favorit</p>
+            </div>
         </div>
-    </div>
 
-    <div class="info-box">
-        <span>✓</span>
-        <div>
-            <h3>Konfirmasi Mudah</h3>
-            <p>Melalui WhatsApp admin</p>
+        <div class="info-box">
+            <span>◈</span>
+            <div>
+                <h3>Promo Menarik</h3>
+                <p>Diskon Rp5.000</p>
+            </div>
         </div>
-    </div>
 
-</section>
+        <div class="info-box">
+            <span>✓</span>
+            <div>
+                <h3>Easy Order</h3>
+                <p>Konfirmasi melalui WhatsApp</p>
+            </div>
+        </div>
+
+    </section>
 
 
-<!-- PRODUK -->
+    <!-- KATALOG PRODUK -->
 
-<section class="product-section" id="produk">
+    <section class="product-section" id="produk">
 
-    <div class="section-title">
+        <div class="section-title">
 
-        <span>OUR COLLECTION</span>
+            <span>OUR COLLECTION</span>
 
-        <h2>PRODUK <b>PREMIUM</b></h2>
+            <h2>PRODUK <b>PREMIUM</b></h2>
 
-        <p>
-            Pilih aplikasi premium yang kamu inginkan.
-        </p>
+            <p>Pilih aplikasi premium yang kamu inginkan.</p>
 
-    </div>
+        </div>
 
-    <div class="product-search">
-
-        <input
-            type="text"
-            id="searchProduct"
-            placeholder="Cari aplikasi..."
-        >
-
-    </div>
-
-    <div class="category-filter">
-
-        <button class="filter-btn active" data-category="Semua">
-            Semua
-        </button>
-
-        <button class="filter-btn" data-category="Kreativitas">
-            Kreativitas
-        </button>
-
-        <button class="filter-btn" data-category="Hiburan">
-            Hiburan
-        </button>
-
-        <button class="filter-btn" data-category="AI">
-            AI
-        </button>
-
-    </div>
-
-    <div class="product-grid" id="productGrid">
-
-        <!-- PRODUK DARI JAVASCRIPT -->
-
-    </div>
-
-</section>
-<!-- PEMESANAN -->
-
-<section class="order-section" id="pemesanan">
-
-    <div class="section-title">
-
-        <span>ORDER NOW</span>
-
-        <h2>FORMULIR <b>PEMESANAN</b></h2>
-
-        <p>Lengkapi data berikut untuk melakukan pemesanan.</p>
-
-    </div>
-
-    <div class="order-card">
-
-        <form id="orderForm">
-
-            <label>Nama Pemesan</label>
-
+        <div class="product-search">
             <input
-                type="text"
-                id="customerName"
-                placeholder="Masukkan nama kamu"
-                required
+                type="search"
+                id="searchProduct"
+                placeholder="Cari aplikasi..."
             >
+        </div>
 
-            <label>Nomor WhatsApp</label>
+        <div class="category-filter">
 
-            <input
-                type="tel"
-                id="customerPhone"
-                placeholder="Contoh: 081234567890"
-                required
-            >
+            <button class="filter-btn active" data-category="Semua">
+                Semua
+            </button>
 
-            <label>Pilih Produk</label>
+            <button class="filter-btn" data-category="Kreativitas">
+                Kreativitas
+            </button>
 
-            <select id="productSelect" required>
-                <option value="">-- Pilih Produk --</option>
-            </select>
+            <button class="filter-btn" data-category="Hiburan">
+                Hiburan
+            </button>
 
-            <label>Durasi / Paket</label>
+            <button class="filter-btn" data-category="AI">
+                AI
+            </button>
 
-            <input
-                type="text"
-                id="packageInput"
-                placeholder="Contoh: 1 Bulan / 1 Tahun"
-            >
+        </div>
 
-            <label>Kode Promo</label>
+        <div class="product-grid" id="productGrid"></div>
 
-            <div class="promo-input">
+    </section>
 
-                <input
-                    type="text"
-                    id="promoInput"
-                    placeholder="Masukkan kode promo"
-                >
+</main>
+<!-- HALAMAN DETAIL PRODUK -->
 
-                <button type="button" id="applyPromo">
-                    PAKAI
+<main id="detailPage" class="hidden">
+
+    <section class="detail-section">
+
+        <button class="back-btn" id="backToProducts">
+            ← KEMBALI KE PRODUK
+        </button>
+
+        <div class="detail-card">
+
+            <div class="detail-image" id="detailImage"></div>
+
+            <div class="detail-info">
+
+                <span class="eyebrow">PRODUCT DETAIL</span>
+
+                <h1 id="detailName">Nama Produk</h1>
+
+                <p id="detailDescription">
+                    Informasi produk.
+                </p>
+
+                <div class="detail-price" id="detailPrice"></div>
+
+                <div class="detail-stock" id="detailStock"></div>
+
+                <div class="detail-duration" id="detailDuration"></div>
+
+                <button class="primary-btn" id="detailOrderBtn">
+                    PESAN SEKARANG →
                 </button>
 
             </div>
 
-            <p id="promoMessage"></p>
+        </div>
 
-            <div class="price-summary">
+    </section>
 
-                <div>
-                    <span>Harga Produk</span>
-                    <strong id="productPrice">-</strong>
+</main>
+
+
+<!-- HALAMAN PEMESANAN -->
+
+<main id="orderPage" class="hidden">
+
+    <section class="order-section">
+
+        <button class="back-btn" id="backToDetail">
+            ← KEMBALI KE DETAIL PRODUK
+        </button>
+
+        <div class="section-title">
+
+            <span>ORDER NOW</span>
+
+            <h2>FORMULIR <b>PEMESANAN</b></h2>
+
+            <p>Lengkapi data pemesanan kamu.</p>
+
+        </div>
+
+        <div class="order-card">
+
+            <form id="orderForm">
+
+                <label for="customerName">
+                    Nama Pemesan
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Masukkan nama"
+                    maxlength="60"
+                    required
+                >
+
+                <label for="customerPhone">
+                    Nomor WhatsApp
+                </label>
+
+                <input
+                    type="tel"
+                    id="customerPhone"
+                    placeholder="Contoh: 081234567890"
+                    required
+                >
+
+                <label for="productSelect">
+                    Produk
+                </label>
+
+                <select id="productSelect" required>
+                    <option value="">Pilih produk</option>
+                </select>
+
+                <label for="packageInput">
+                    Durasi / Paket
+                </label>
+
+                <input
+                    type="text"
+                    id="packageInput"
+                    placeholder="Contoh: 1 Bulan"
+                >
+
+                <label for="promoInput">
+                    Kode Promo
+                </label>
+
+                <div class="promo-input">
+
+                    <input
+                        type="text"
+                        id="promoInput"
+                        placeholder="Masukkan kode promo"
+                    >
+
+                    <button type="button" id="applyPromo">
+                        PAKAI
+                    </button>
+
                 </div>
 
-                <div>
-                    <span>Diskon</span>
-                    <strong id="discountPrice">Rp0</strong>
+                <p id="promoMessage">
+                    Gunakan kode promo untuk diskon Rp5.000.
+                </p>
+
+                <div class="price-summary">
+
+                    <div>
+                        <span>Harga Produk</span>
+                        <strong id="productPrice">-</strong>
+                    </div>
+
+                    <div>
+                        <span>Diskon</span>
+                        <strong id="discountPrice">Rp0</strong>
+                    </div>
+
+                    <div class="total-price">
+                        <span>Total Pembayaran</span>
+                        <strong id="totalPrice">-</strong>
+                    </div>
+
                 </div>
 
-                <div class="total-price">
-                    <span>Total Pembayaran</span>
-                    <strong id="totalPrice">-</strong>
-                </div>
+                <button
+                    type="submit"
+                    class="primary-btn order-submit"
+                >
+                    LANJUT PEMBAYARAN →
+                </button>
 
-            </div>
+            </form>
 
-            <button type="submit" class="primary-btn order-submit">
-                LANJUT PEMBAYARAN →
-            </button>
+        </div>
 
-        </form>
+    </section>
 
-    </div>
-
-</section>
+</main>
 
 
 <!-- POPUP QR PEMBAYARAN -->
@@ -267,33 +334,36 @@
             ×
         </button>
 
-        <span class="modal-label">PAYMENT</span>
+        <span class="eyebrow">PAYMENT CHECKOUT</span>
 
         <h2>PEMBAYARAN <b>QRIS</b></h2>
 
-        <p>Silakan scan QR berikut untuk melakukan pembayaran.</p>
+        <p>Silakan scan QR di bawah untuk melakukan pembayaran.</p>
 
         <div class="qr-container">
-
-            <img src="qr.jpg" alt="QR Pembayaran">
-
+            <img src="qr.jpg" alt="QR Pembayaran Lixera">
         </div>
 
         <div class="payment-total">
+
             <span>Total yang harus dibayar</span>
+
             <h2 id="paymentAmount">Rp0</h2>
+
         </div>
+
+        <div class="payment-order-info" id="paymentOrderInfo"></div>
 
         <p class="payment-warning">
             Pastikan nominal pembayaran sesuai dengan total pesanan.
         </p>
 
         <button class="primary-btn" id="confirmWhatsApp">
-            KONFIRMASI VIA WHATSAPP
+            SUDAH BAYAR - KONFIRMASI WHATSAPP
         </button>
 
         <p class="payment-note">
-            Pesanan akan menunggu pemeriksaan pembayaran oleh admin.
+            Pesanan akan diperiksa admin sebelum dinyatakan lunas.
         </p>
 
     </div>
@@ -301,56 +371,71 @@
 </div>
 
 
-<!-- PANEL ADMIN -->
+<!-- HALAMAN ADMIN -->
 
-<section class="admin-section" id="adminSection">
+<main id="adminPage" class="hidden">
 
-    <div class="section-title">
-        <span>ADMIN AREA</span>
-        <h2>KELOLA <b>PESANAN</b></h2>
-    </div>
+    <section class="admin-section">
 
-    <div class="admin-login" id="adminLogin">
+        <div class="section-title">
+            <span>PRIVATE ACCESS</span>
+            <h2>DASHBOARD <b>ADMIN</b></h2>
+        </div>
 
-        <input
-            type="password"
-            id="adminPassword"
-            placeholder="Password admin"
-        >
+        <div class="admin-login" id="adminLogin">
 
-        <button class="primary-btn" id="adminLoginBtn">
-            MASUK ADMIN
-        </button>
+            <input
+                type="password"
+                id="adminPassword"
+                placeholder="Masukkan password admin"
+            >
 
-    </div>
+            <button class="primary-btn" id="adminLoginBtn">
+                LOGIN ADMIN
+            </button>
 
-    <div class="admin-dashboard hidden" id="adminDashboard">
+        </div>
 
-        <h3>Daftar Pesanan</h3>
+        <div id="adminDashboard" class="admin-dashboard hidden">
 
-        <div id="adminOrders"></div>
+            <div class="admin-top">
+                <h3>Daftar Pesanan</h3>
 
-    </div>
+                <button id="adminLogout" class="logout-btn">
+                    KELUAR
+                </button>
+            </div>
 
-</section>
-<!-- FOOTER -->
+            <div id="adminOrders"></div>
+
+        </div>
+
+    </section>
+
+    </main>
+    <!-- FOOTER -->
 
 <footer class="footer">
 
     <div class="footer-brand">
+
         <img src="lixeralogo.png" alt="Lixera">
+
         <h2>APLIKASI PREMIUM - LIXERA</h2>
+
     </div>
 
-    <p>
-        Your Premium Digital Experience.
-    </p>
+    <p>Your Premium Digital Experience.</p>
 
     <div class="footer-line"></div>
 
     <small>
         © 2026 LIXERA STORE. All Rights Reserved.
     </small>
+
+    <button class="admin-access" id="openAdmin">
+        ADMIN
+    </button>
 
 </footer>
 
