@@ -1,6 +1,6 @@
-// ======================================
-// LIXERA STORE - PRODUCT DATABASE
-// ======================================
+// ==========================================
+// LIXERA STORE - DATABASE PRODUK
+// ==========================================
 
 const products = [
 
@@ -11,7 +11,8 @@ const products = [
         price: 7000,
         stock: 87,
         duration: "1 Tahun",
-        category: "Kreativitas"
+        category: "Kreativitas",
+        description: "Aplikasi editing video dan animasi untuk kebutuhan kreatif."
     },
 
     {
@@ -21,7 +22,8 @@ const products = [
         price: 25000,
         stock: null,
         duration: "1 Bulan",
-        category: "Kreativitas"
+        category: "Kreativitas",
+        description: "Aplikasi editing video dengan berbagai fitur kreatif."
     },
 
     {
@@ -31,7 +33,8 @@ const products = [
         price: 10000,
         stock: null,
         duration: "1 Tahun",
-        category: "Kreativitas"
+        category: "Kreativitas",
+        description: "Aplikasi desain grafis untuk berbagai kebutuhan."
     },
 
     {
@@ -41,7 +44,8 @@ const products = [
         price: 25000,
         stock: null,
         duration: "Tanya Admin",
-        category: "Kreativitas"
+        category: "Kreativitas",
+        description: "Aplikasi pengeditan foto dan video."
     },
 
     {
@@ -51,7 +55,8 @@ const products = [
         price: 15000,
         stock: null,
         duration: "Tanya Admin",
-        category: "Hiburan"
+        category: "Hiburan",
+        description: "Layanan video dan hiburan digital."
     },
 
     {
@@ -61,7 +66,8 @@ const products = [
         price: 50000,
         stock: null,
         duration: "Tanya Admin",
-        category: "Hiburan"
+        category: "Hiburan",
+        description: "Layanan streaming film dan serial."
     },
 
     {
@@ -71,7 +77,8 @@ const products = [
         price: 35000,
         stock: null,
         duration: "Tanya Admin",
-        category: "Kreativitas"
+        category: "Kreativitas",
+        description: "Aplikasi editing video."
     },
 
     {
@@ -81,7 +88,8 @@ const products = [
         price: 40000,
         stock: null,
         duration: "Tanya Admin",
-        category: "Hiburan"
+        category: "Hiburan",
+        description: "Platform streaming hiburan dan olahraga."
     },
 
     {
@@ -91,7 +99,8 @@ const products = [
         price: 80000,
         stock: 71,
         duration: "Tanya Admin",
-        category: "AI"
+        category: "AI",
+        description: "Asisten kecerdasan buatan untuk membantu berbagai pekerjaan."
     },
 
     {
@@ -101,7 +110,8 @@ const products = [
         price: 45000,
         stock: null,
         duration: "Tanya Admin",
-        category: "Hiburan"
+        category: "Hiburan",
+        description: "Platform streaming drama dan film."
     },
 
     {
@@ -111,7 +121,8 @@ const products = [
         price: 50000,
         stock: null,
         duration: "Tanya Admin",
-        category: "AI"
+        category: "AI",
+        description: "Asisten AI untuk membantu produktivitas."
     },
 
     {
@@ -121,7 +132,8 @@ const products = [
         price: 30000,
         stock: null,
         duration: "Tanya Admin",
-        category: "Hiburan"
+        category: "Hiburan",
+        description: "Platform streaming film dan serial."
     },
 
     {
@@ -131,7 +143,8 @@ const products = [
         price: 35000,
         stock: null,
         duration: "Tanya Admin",
-        category: "Kreativitas"
+        category: "Kreativitas",
+        description: "Aplikasi desain dan editing foto."
     },
 
     {
@@ -141,15 +154,28 @@ const products = [
         price: 30000,
         stock: null,
         duration: "Tanya Admin",
-        category: "Hiburan"
+        category: "Hiburan",
+        description: "Platform streaming musik dan podcast."
     }
 
 ];
 
 
-// ======================================
-// ELEMENT
-// ======================================
+// ==========================================
+// ELEMENT HTML
+// ==========================================
+
+const homePage =
+    document.getElementById("homePage");
+
+const detailPage =
+    document.getElementById("detailPage");
+
+const orderPage =
+    document.getElementById("orderPage");
+
+const adminPage =
+    document.getElementById("adminPage");
 
 const productGrid =
     document.getElementById("productGrid");
@@ -162,30 +188,146 @@ const searchProduct =
 
 let activeCategory = "Semua";
 
+let selectedProductId = null;
 
-// ======================================
-// FORMAT RUPIAH
-// ======================================
+let appliedPromo = null;
+
+let currentOrder = null;
+
+
+// ==========================================
+// FORMAT HARGA
+// ==========================================
 
 function rupiah(number) {
 
     return new Intl.NumberFormat("id-ID", {
+
         style: "currency",
+
         currency: "IDR",
+
         maximumFractionDigits: 0
+
     }).format(number);
 
 }
 
 
-// ======================================
-// TAMPILKAN PRODUK
-// ======================================
+// ==========================================
+// PENYIMPANAN STOK
+// ==========================================
+
+function loadStock() {
+
+    const savedStock = JSON.parse(
+
+        localStorage.getItem("lixeraStock") || "{}"
+
+    );
+
+    products.forEach(product => {
+
+        if (
+            Object.prototype.hasOwnProperty.call(
+                savedStock,
+                product.id
+            )
+        ) {
+
+            product.stock = savedStock[product.id];
+
+        }
+
+    });
+
+}
+
+
+function saveStock() {
+
+    const stockData = {};
+
+    products.forEach(product => {
+
+        stockData[product.id] = product.stock;
+
+    });
+
+    localStorage.setItem(
+
+        "lixeraStock",
+
+        JSON.stringify(stockData)
+
+    );
+
+}
+
+
+// ==========================================
+// GAMBAR PRODUK
+// ==========================================
+
+function productImage(product) {
+
+    if (product.image) {
+
+        return `
+
+            <img
+                class="product-image"
+                src="${product.image}"
+                alt="${product.name}"
+                onerror="this.outerHTML='<div class=&quot;product-placeholder&quot;>${product.name.charAt(0)}</div>'"
+            >
+
+        `;
+
+    }
+
+    return `
+
+        <div class="product-placeholder">
+            ${product.name.charAt(0)}
+        </div>
+
+    `;
+
+}
+
+
+// ==========================================
+// INFORMASI STOK
+// ==========================================
+
+function stockInformation(product) {
+
+    if (product.stock === null) {
+
+        return "Cek stok ke admin";
+
+    }
+
+    if (product.stock === 0) {
+
+        return "STOK HABIS";
+
+    }
+
+    return `Stok tersedia: ${product.stock}`;
+
+}
+
+
+// ==========================================
+// RENDER KATALOG
+// ==========================================
 
 function renderProducts() {
 
     const keyword =
-        searchProduct.value.toLowerCase();
+        searchProduct.value.toLowerCase().trim();
 
     const filtered = products.filter(product => {
 
@@ -204,36 +346,15 @@ function renderProducts() {
 
     filtered.forEach(product => {
 
-        const stockText =
-            product.stock === null
-                ? "Cek stok ke admin"
-                : product.stock > 0
-                    ? `Stok tersedia: ${product.stock}`
-                    : "STOK HABIS";
-
-        const stockClass =
-            product.stock === null
-                ? ""
-                : product.stock > 0
-                    ? "stock-available"
-                    : "stock-empty";
-
-        const isSoldOut = product.stock === 0;
-
-        const imageContent = product.image
-            ? `<img class="product-image"
-                   src="${product.image}"
-                   alt="${product.name}"
-                   onerror="this.outerHTML='<div class=&quot;product-placeholder&quot;>${product.name.charAt(0)}</div>'">`
-            : `<div class="product-placeholder">${product.name.charAt(0)}</div>`;
-
         const card = document.createElement("div");
 
         card.className = "product-card";
 
+        const soldOut = product.stock === 0;
+
         card.innerHTML = `
 
-            ${imageContent}
+            ${productImage(product)}
 
             <h3>${product.name}</h3>
 
@@ -241,16 +362,18 @@ function renderProducts() {
                 ${rupiah(product.price)}
             </div>
 
-            <div class="product-stock ${stockClass}">
-                ${stockText}
+            <div class="product-stock ${
+                soldOut ? "stock-empty" : "stock-available"
+            }">
+                ${stockInformation(product)}
             </div>
 
             <button
                 class="product-order-btn"
                 data-id="${product.id}"
-                ${isSoldOut ? "disabled" : ""}
+                ${soldOut ? "disabled" : ""}
             >
-                ${isSoldOut ? "STOK HABIS" : "PESAN SEKARANG"}
+                ${soldOut ? "STOK HABIS" : "LIHAT DETAIL"}
             </button>
 
         `;
@@ -259,7 +382,7 @@ function renderProducts() {
 
     });
 
-    if (filtered.length === 0) {
+    if (!filtered.length) {
 
         productGrid.innerHTML =
             "<p>Produk tidak ditemukan.</p>";
@@ -269,14 +392,14 @@ function renderProducts() {
 }
 
 
-// ======================================
-// PILIH PRODUK UNTUK ORDER
-// ======================================
+// ==========================================
+// DROPDOWN PRODUK
+// ==========================================
 
 function fillProductSelect() {
 
     productSelect.innerHTML =
-        '<option value="">-- Pilih Produk --</option>';
+        '<option value="">Pilih produk</option>';
 
     products.forEach(product => {
 
@@ -295,9 +418,108 @@ function fillProductSelect() {
 }
 
 
-// ======================================
-// EVENT PRODUK
-// ======================================
+// ==========================================
+// NAVIGASI HALAMAN INTERNAL
+// ==========================================
+
+function showPage(page) {
+
+    homePage.classList.add("hidden");
+
+    detailPage.classList.add("hidden");
+
+    orderPage.classList.add("hidden");
+
+    adminPage.classList.add("hidden");
+
+    if (page === "home" || page === "produk") {
+
+        homePage.classList.remove("hidden");
+
+    }
+
+    if (page === "detail") {
+
+        detailPage.classList.remove("hidden");
+
+    }
+
+    if (page === "pemesanan") {
+
+        orderPage.classList.remove("hidden");
+
+    }
+
+    if (page === "admin") {
+
+        adminPage.classList.remove("hidden");
+
+    }
+
+    document.getElementById("navigation")
+        .classList.remove("show");
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+// ==========================================
+// BUKA DETAIL PRODUK
+// ==========================================
+
+function openProductDetail(id) {
+
+    const product = products.find(item =>
+
+        item.id === id
+
+    );
+
+    if (!product) return;
+
+    if (product.stock === 0) {
+
+        alert("Maaf, produk sedang habis.");
+
+        return;
+
+    }
+
+    selectedProductId = id;
+
+    document.getElementById("detailImage").innerHTML =
+        productImage(product);
+
+    document.getElementById("detailName").textContent =
+        product.name;
+
+    document.getElementById("detailDescription").textContent =
+        product.description;
+
+    document.getElementById("detailPrice").textContent =
+        rupiah(product.price);
+
+    document.getElementById("detailStock").textContent =
+        stockInformation(product);
+
+    document.getElementById("detailDuration").textContent =
+        "Durasi: " + product.duration;
+
+    showPage("detail");
+
+}
+
+
+// ==========================================
+// TOMBOL KATALOG
+// ==========================================
 
 productGrid.addEventListener("click", function(event) {
 
@@ -306,21 +528,61 @@ productGrid.addEventListener("click", function(event) {
 
     if (!button) return;
 
-    const id = button.dataset.id;
-
-    const product =
-        products.find(item => item.id === id);
-
-    if (!product || product.stock === 0) return;
-
-    productSelect.value = id;
-
-    updatePrice();
-
-    document.getElementById("pemesanan")
-        .scrollIntoView({ behavior: "smooth" });
+    openProductDetail(button.dataset.id);
 
 });
+
+
+document.getElementById("exploreBtn")
+    .addEventListener("click", function() {
+
+        showPage("produk");
+
+        document.getElementById("produk")
+            .scrollIntoView();
+
+    });
+
+
+document.getElementById("backToProducts")
+    .addEventListener("click", function() {
+
+        showPage("produk");
+
+        document.getElementById("produk")
+            .scrollIntoView();
+
+    });
+
+
+// ==========================================
+// KLIK PESAN DARI DETAIL
+// ==========================================
+
+document.getElementById("detailOrderBtn")
+    .addEventListener("click", function() {
+
+        productSelect.value = selectedProductId;
+
+        document.getElementById("packageInput").value = "";
+
+        appliedPromo = null;
+
+        document.getElementById("promoInput").value = "";
+
+        document.getElementById("promoMessage").textContent =
+            "Gunakan kode promo untuk diskon Rp5.000.";
+
+        updatePrice();
+
+        showPage("pemesanan");
+
+    });
+
+
+// ==========================================
+// PENCARIAN DAN FILTER
+// ==========================================
 
 searchProduct.addEventListener("input", renderProducts);
 
@@ -331,7 +593,7 @@ document.querySelectorAll(".filter-btn")
         button.addEventListener("click", function() {
 
             document.querySelectorAll(".filter-btn")
-                .forEach(btn => btn.classList.remove("active"));
+                .forEach(item => item.classList.remove("active"));
 
             this.classList.add("active");
 
@@ -344,60 +606,77 @@ document.querySelectorAll(".filter-btn")
     });
 
 
-// ======================================
-// NAVIGASI MOBILE
-// ======================================
+// ==========================================
+// NAVBAR
+// ==========================================
 
 document.getElementById("menuToggle")
     .addEventListener("click", function() {
 
-        const nav =
-            document.getElementById("navigation");
-
-        nav.classList.toggle("show");
+        document.getElementById("navigation")
+            .classList.toggle("show");
 
     });
+
 
 document.querySelectorAll(".nav-link")
     .forEach(link => {
 
-        link.addEventListener("click", function() {
+        link.addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            const page = this.dataset.page;
+
+            if (page === "pemesanan") {
+
+                showPage("pemesanan");
+
+            } else {
+
+                showPage(page);
+
+            }
 
             document.querySelectorAll(".nav-link")
                 .forEach(item => item.classList.remove("active"));
 
             this.classList.add("active");
 
-            document.getElementById("navigation")
-                .classList.remove("show");
-
         });
 
     });
 
 
-// ======================================
-// INISIALISASI
-// ======================================
+// ==========================================
+// KEMBALI DARI FORMULIR
+// ==========================================
 
-renderProducts();
-fillProductSelect();
-// ======================================
-// LIXERA - PROMO SYSTEM
-// ======================================
+document.getElementById("backToDetail")
+    .addEventListener("click", function() {
+
+        showPage("detail");
+
+    });
+// ==========================================
+// PROMO LIXERA
+// ==========================================
 
 const promoCodes = [
+
     "lixapkstore",
+
     "seanpremium",
+
     "zikganteng",
+
     "taratampan",
+
     "aressicoll"
+
 ];
 
 const PROMO_DISCOUNT = 5000;
-
-let appliedPromo = null;
-let currentOrder = null;
 
 const promoInput =
     document.getElementById("promoInput");
@@ -415,35 +694,65 @@ const totalPrice =
     document.getElementById("totalPrice");
 
 
-// ======================================
-// DATA HARGA
-// ======================================
+// ==========================================
+// AMBIL PRODUK TERPILIH
+// ==========================================
 
 function getSelectedProduct() {
 
     return products.find(product =>
+
         product.id === productSelect.value
+
     );
 
 }
 
 
-// ======================================
-// CEK PROMO
-// ======================================
+// ==========================================
+// CEK PROMO YANG SUDAH DIGUNAKAN
+// ==========================================
+
+function getUsedPromos() {
+
+    return JSON.parse(
+
+        localStorage.getItem("lixeraUsedPromos") || "[]"
+
+    );
+
+}
+
+
+// ==========================================
+// TERAPKAN KODE PROMO
+// ==========================================
 
 function applyPromoCode() {
 
     const code =
         promoInput.value.trim().toLowerCase();
 
+    const product = getSelectedProduct();
+
+    if (!product) {
+
+        promoMessage.textContent =
+            "Pilih produk terlebih dahulu.";
+
+        return;
+
+    }
+
     if (!code) {
 
         promoMessage.textContent =
-            "Masukkan kode promo terlebih dahulu.";
+            "Masukkan kode promo.";
 
         appliedPromo = null;
+
         updatePrice();
+
         return;
 
     }
@@ -456,23 +765,24 @@ function applyPromoCode() {
         promoMessage.style.color = "#fb7185";
 
         appliedPromo = null;
+
         updatePrice();
+
         return;
 
     }
 
-    const usedPromos =
-        JSON.parse(localStorage.getItem("lixeraUsedPromos") || "[]");
-
-    if (usedPromos.includes(code)) {
+    if (getUsedPromos().includes(code)) {
 
         promoMessage.textContent =
-            "Kode promo ini sudah pernah digunakan.";
+            "Kode promo sudah digunakan.";
 
         promoMessage.style.color = "#fb7185";
 
         appliedPromo = null;
+
         updatePrice();
+
         return;
 
     }
@@ -480,7 +790,7 @@ function applyPromoCode() {
     appliedPromo = code;
 
     promoMessage.textContent =
-        "Promo berhasil dipasang! Diskon Rp5.000.";
+        "Berhasil! Kamu mendapatkan diskon Rp5.000.";
 
     promoMessage.style.color = "#4ade80";
 
@@ -493,9 +803,9 @@ document.getElementById("applyPromo")
     .addEventListener("click", applyPromoCode);
 
 
-// ======================================
-// HITUNG TOTAL HARGA
-// ======================================
+// ==========================================
+// HITUNG HARGA
+// ==========================================
 
 function updatePrice() {
 
@@ -504,7 +814,9 @@ function updatePrice() {
     if (!product) {
 
         productPrice.textContent = "-";
+
         discountPrice.textContent = "Rp0";
+
         totalPrice.textContent = "-";
 
         return;
@@ -530,6 +842,11 @@ function updatePrice() {
 
 }
 
+
+// ==========================================
+// SAAT PRODUK BERUBAH
+// ==========================================
+
 productSelect.addEventListener("change", function() {
 
     appliedPromo = null;
@@ -546,31 +863,50 @@ productSelect.addEventListener("change", function() {
 });
 
 
-// ======================================
-// PENYIMPANAN PESANAN
-// ======================================
+// ==========================================
+// DATABASE PESANAN LOKAL
+// ==========================================
 
 function getOrders() {
 
     return JSON.parse(
+
         localStorage.getItem("lixeraOrders") || "[]"
+
     );
 
 }
+
 
 function saveOrders(orders) {
 
     localStorage.setItem(
+
         "lixeraOrders",
+
         JSON.stringify(orders)
+
     );
 
 }
 
 
-// ======================================
-// BUAT PESANAN
-// ======================================
+// ==========================================
+// NOMOR TRANSAKSI
+// ==========================================
+
+function generateOrderId() {
+
+    return "LXR-" +
+
+        Date.now().toString().slice(-9);
+
+}
+
+
+// ==========================================
+// SUBMIT PEMESANAN
+// ==========================================
 
 document.getElementById("orderForm")
     .addEventListener("submit", function(event) {
@@ -578,14 +914,17 @@ document.getElementById("orderForm")
         event.preventDefault();
 
         const name =
+
             document.getElementById("customerName")
                 .value.trim();
 
         const phone =
+
             document.getElementById("customerPhone")
                 .value.trim();
 
         const packageName =
+
             document.getElementById("packageInput")
                 .value.trim();
 
@@ -593,7 +932,7 @@ document.getElementById("orderForm")
 
         if (!product) {
 
-            alert("Silakan pilih produk terlebih dahulu.");
+            alert("Pilih produk terlebih dahulu.");
 
             return;
 
@@ -601,7 +940,7 @@ document.getElementById("orderForm")
 
         if (product.stock === 0) {
 
-            alert("Maaf, produk sedang habis.");
+            alert("Produk sedang habis.");
 
             return;
 
@@ -615,18 +954,30 @@ document.getElementById("orderForm")
 
         }
 
+        if (
+            appliedPromo &&
+            getUsedPromos().includes(appliedPromo)
+        ) {
+
+            alert("Kode promo sudah digunakan.");
+
+            appliedPromo = null;
+
+            updatePrice();
+
+            return;
+
+        }
+
         const discount = appliedPromo
             ? Math.min(PROMO_DISCOUNT, product.price)
             : 0;
 
         const total = product.price - discount;
 
-        const orderId =
-            "LXR-" + Date.now().toString().slice(-9);
-
         currentOrder = {
 
-            id: orderId,
+            id: generateOrderId(),
 
             name: name,
 
@@ -646,11 +997,14 @@ document.getElementById("orderForm")
 
             total: total,
 
-            status: "Menunggu Pembayaran",
+            status: "MENUNGGU PEMBAYARAN",
 
             createdAt: new Date().toISOString()
 
         };
+
+
+        // SIMPAN PESANAN
 
         const orders = getOrders();
 
@@ -658,8 +1012,26 @@ document.getElementById("orderForm")
 
         saveOrders(orders);
 
+
+        // TAMPILKAN NOMINAL QR
+
         document.getElementById("paymentAmount")
             .textContent = rupiah(total);
+
+
+        document.getElementById("paymentOrderInfo")
+            .innerHTML = `
+
+                ID Pesanan: <b>${currentOrder.id}</b><br>
+
+                Produk: <b>${currentOrder.productName}</b><br>
+
+                Paket: <b>${currentOrder.package}</b>
+
+            `;
+
+
+        // TAMPILKAN POPUP
 
         document.getElementById("paymentModal")
             .classList.add("show");
@@ -667,9 +1039,9 @@ document.getElementById("orderForm")
     });
 
 
-// ======================================
-// TUTUP POPUP
-// ======================================
+// ==========================================
+// TUTUP POPUP PEMBAYARAN
+// ==========================================
 
 document.getElementById("closePayment")
     .addEventListener("click", function() {
@@ -680,26 +1052,26 @@ document.getElementById("closePayment")
     });
 
 
-// ======================================
-// WHATSAPP KONFIRMASI
-// ======================================
+// ==========================================
+// KONFIRMASI WHATSAPP
+// ==========================================
 
 document.getElementById("confirmWhatsApp")
     .addEventListener("click", function() {
 
         if (!currentOrder) {
 
-            alert("Pesanan tidak ditemukan.");
+            alert("Data pesanan tidak ditemukan.");
 
             return;
 
         }
 
-        const message =
+        const message = `
 
-`HALO ADMIN LIXERA!
+HALO ADMIN LIXERA!
 
-Saya ingin konfirmasi pesanan.
+Saya ingin konfirmasi pembayaran.
 
 ID Pesanan: ${currentOrder.id}
 
@@ -713,83 +1085,72 @@ Paket: ${currentOrder.package}
 
 Harga: ${rupiah(currentOrder.price)}
 
-Promo: ${currentOrder.promo || "Tidak menggunakan promo"}
+Kode Promo: ${currentOrder.promo || "Tidak ada"}
 
 Diskon: ${rupiah(currentOrder.discount)}
 
-TOTAL: ${rupiah(currentOrder.total)}
+TOTAL BAYAR: ${rupiah(currentOrder.total)}
 
-Saya sudah melakukan pembayaran.
-Berikutnya saya akan mengirimkan bukti pembayaran.
+Saya sudah melakukan pembayaran melalui QRIS.
 
-Terima kasih!`;
+Saya akan mengirimkan bukti pembayaran.
+
+Terima kasih.
+
+        `;
 
         const whatsappURL =
+
             "https://wa.me/628818238236?text=" +
+
             encodeURIComponent(message);
 
         window.open(whatsappURL, "_blank");
 
     });
-// ======================================
-// LIXERA - ADMIN SYSTEM
-// ======================================
-
-// GANTI PASSWORD INI SEBELUM WEBSITE ONLINE
-const ADMIN_PASSWORD = "LIXERA2026";
 
 
-// ======================================
-// AMBIL DATA STOK TERSIMPAN
-// ======================================
+// ==========================================
+// TUTUP MODAL KETIKA KLIK LUAR
+// ==========================================
 
-function loadStock() {
+document.getElementById("paymentModal")
+    .addEventListener("click", function(event) {
 
-    const savedStock = JSON.parse(
-        localStorage.getItem("lixeraStock") || "{}"
-    );
+        if (event.target === this) {
 
-    products.forEach(product => {
-
-        if (Object.prototype.hasOwnProperty.call(
-            savedStock,
-            product.id
-        )) {
-
-            product.stock = savedStock[product.id];
+            this.classList.remove("show");
 
         }
 
     });
+// ==========================================
+// LIXERA ADMIN SYSTEM
+// ==========================================
 
-}
+// PASSWORD ADMIN SEMENTARA
+// GANTI SEBELUM WEBSITE DIPAKAI
 
-function saveStock() {
+const ADMIN_PASSWORD = "LIXERA2026";
 
-    const stockData = {};
 
-    products.forEach(product => {
+// ==========================================
+// LOGIN ADMIN
+// ==========================================
 
-        stockData[product.id] = product.stock;
+document.getElementById("openAdmin")
+    .addEventListener("click", function() {
+
+        showPage("admin");
 
     });
 
-    localStorage.setItem(
-        "lixeraStock",
-        JSON.stringify(stockData)
-    );
-
-}
-
-
-// ======================================
-// LOGIN ADMIN
-// ======================================
 
 document.getElementById("adminLoginBtn")
     .addEventListener("click", function() {
 
         const password =
+
             document.getElementById("adminPassword").value;
 
         if (password !== ADMIN_PASSWORD) {
@@ -811,13 +1172,34 @@ document.getElementById("adminLoginBtn")
     });
 
 
-// ======================================
-// TAMPILKAN PESANAN ADMIN
-// ======================================
+// ==========================================
+// LOGOUT ADMIN
+// ==========================================
+
+document.getElementById("adminLogout")
+    .addEventListener("click", function() {
+
+        document.getElementById("adminLogin")
+            .classList.remove("hidden");
+
+        document.getElementById("adminDashboard")
+            .classList.add("hidden");
+
+        document.getElementById("adminPassword").value = "";
+
+        showPage("home");
+
+    });
+
+
+// ==========================================
+// TAMPILKAN DAFTAR PESANAN
+// ==========================================
 
 function renderAdminOrders() {
 
     const container =
+
         document.getElementById("adminOrders");
 
     const orders = getOrders();
@@ -835,19 +1217,17 @@ function renderAdminOrders() {
 
     [...orders].reverse().forEach(order => {
 
-        const orderElement =
-            document.createElement("div");
+        const element = document.createElement("div");
 
-        orderElement.className = "admin-order";
+        element.className = "admin-order";
 
-        const isPaid =
-            order.status === "LUNAS";
+        const paid = order.status === "LUNAS";
 
-        orderElement.innerHTML = `
+        element.innerHTML = `
 
             <h4>${order.productName}</h4>
 
-            <p>ID: ${order.id}</p>
+            <p>ID Pesanan: ${order.id}</p>
 
             <p>Nama: ${order.name}</p>
 
@@ -855,36 +1235,41 @@ function renderAdminOrders() {
 
             <p>Paket: ${order.package}</p>
 
-            <p>Total: ${rupiah(order.total)}</p>
+            <p>Harga: ${rupiah(order.price)}</p>
 
             <p>Promo: ${order.promo || "-"}</p>
 
-            <p>Status: ${order.status}</p>
+            <p>Diskon: ${rupiah(order.discount)}</p>
+
+            <p>Total: ${rupiah(order.total)}</p>
+
+            <p>Status: <b>${order.status}</b></p>
 
             <button
                 data-order-id="${order.id}"
-                ${isPaid ? "disabled" : ""}
+                ${paid ? "disabled" : ""}
             >
-                ${isPaid ? "SUDAH LUNAS" : "KONFIRMASI LUNAS"}
+                ${paid ? "SUDAH LUNAS" : "KONFIRMASI LUNAS"}
             </button>
 
         `;
 
-        container.appendChild(orderElement);
+        container.appendChild(element);
 
     });
 
 }
 
 
-// ======================================
-// KONFIRMASI PEMBAYARAN ADMIN
-// ======================================
+// ==========================================
+// KONFIRMASI PEMBAYARAN
+// ==========================================
 
 document.getElementById("adminOrders")
     .addEventListener("click", function(event) {
 
         const button =
+
             event.target.closest("button[data-order-id]");
 
         if (!button) return;
@@ -894,7 +1279,9 @@ document.getElementById("adminOrders")
         const orders = getOrders();
 
         const order = orders.find(item =>
+
             item.id === orderId
+
         );
 
         if (!order || order.status === "LUNAS") {
@@ -903,8 +1290,11 @@ document.getElementById("adminOrders")
 
         }
 
+
         const product = products.find(item =>
+
             item.id === order.productId
+
         );
 
         if (!product) {
@@ -915,30 +1305,41 @@ document.getElementById("adminOrders")
 
         }
 
+
+        // CEK STOK SEBELUM LUNAS
+
         if (
             product.stock !== null &&
             product.stock <= 0
         ) {
 
-            alert("Stok produk sudah habis. Pesanan tidak bisa dilunasi.");
+            alert("Stok produk sudah habis.");
 
             return;
 
         }
 
+
+        // KONFIRMASI ADMIN
+
         const confirmation = confirm(
 
-            `Pastikan pembayaran ${order.id} sudah diterima.\n\n` +
-            `Produk: ${order.productName}\n` +
-            `Total: ${rupiah(order.total)}\n\n` +
-            `Konfirmasi pembayaran lunas?`
+            "PASTIKAN PEMBAYARAN SUDAH DITERIMA!\n\n" +
+
+            "ID: " + order.id + "\n" +
+
+            "Produk: " + order.productName + "\n" +
+
+            "Total: " + rupiah(order.total) + "\n\n" +
+
+            "Konfirmasi pembayaran lunas?"
 
         );
 
         if (!confirmation) return;
 
 
-        // STOK BERKURANG SETELAH ADMIN KONFIRMASI
+        // KURANGI STOK SETELAH ADMIN KONFIRMASI
 
         if (product.stock !== null) {
 
@@ -947,15 +1348,16 @@ document.getElementById("adminOrders")
         }
 
 
-        // PROMO DITANDAI TERPAKAI
+        // SIMPAN STOK
+
+        saveStock();
+
+
+        // TANDAI PROMO SUDAH DIPAKAI
 
         if (order.promo) {
 
-            const usedPromos = JSON.parse(
-
-                localStorage.getItem("lixeraUsedPromos") || "[]"
-
-            );
+            const usedPromos = getUsedPromos();
 
             if (!usedPromos.includes(order.promo)) {
 
@@ -964,14 +1366,17 @@ document.getElementById("adminOrders")
             }
 
             localStorage.setItem(
+
                 "lixeraUsedPromos",
+
                 JSON.stringify(usedPromos)
+
             );
 
         }
 
 
-        // UPDATE STATUS PESANAN
+        // UBAH STATUS PESANAN
 
         order.status = "LUNAS";
 
@@ -979,22 +1384,30 @@ document.getElementById("adminOrders")
 
         saveOrders(orders);
 
-        saveStock();
+
+        // REFRESH DASHBOARD
 
         renderAdminOrders();
 
         renderProducts();
 
+        fillProductSelect();
+
+
         alert(
-            "Pembayaran berhasil dikonfirmasi!\nStok produk telah diperbarui."
+
+            "PEMBAYARAN BERHASIL DIKONFIRMASI!\n\n" +
+
+            "Stok produk sudah diperbarui."
+
         );
 
     });
 
 
-// ======================================
-// UPDATE AWAL WEBSITE
-// ======================================
+// ==========================================
+// INISIALISASI WEBSITE
+// ==========================================
 
 loadStock();
 
@@ -1003,3 +1416,10 @@ renderProducts();
 fillProductSelect();
 
 updatePrice();
+
+showPage("home");
+
+
+// ==========================================
+// SELESAI - LIXERA STORE
+// ==========================================
